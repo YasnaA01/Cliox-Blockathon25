@@ -38,10 +38,19 @@ class Algorithm:
         filename = str(input_files[0])
     
         # TODO: 4. run algorithm here
-
+        try:
+            with open(filename, "r", encoding="utf-8") as f:
+                line_count = sum(1 for _ in f)
+        except Exception as e:
+            logger.exception(f"Error reading file: {e}")
+            self.results = {"error": str(e)}
+            return self
 
         # TODO: 5. save results here
-
+        self.results = {
+            "filename": filename,
+            "line_count": line_count
+        }
         # TODO: 6. return self
         return self
 
